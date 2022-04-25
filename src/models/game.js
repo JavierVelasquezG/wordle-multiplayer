@@ -3,7 +3,9 @@ class Game {
      *
      * @param {String} word
      * @param {String} wordTry
+     * @returns {Array} Coincidencias entre la palabra correcta y el intento
      */
+
     static checkWord = (word, wordTry) => {
         if (word.length !== wordTry.length) {
             throw {
@@ -32,9 +34,6 @@ class Game {
                 matches.push('wrong')
 
                 // Guardar cantidad de letras por palabra
-                pendingLettersTry[letterTry] = pendingLettersTry[letterTry]
-                    ? pendingLettersTry[letterTry] + 1
-                    : 1
                 pendingLettersWord[letter] = pendingLettersWord[letter]
                     ? pendingLettersWord[letter] + 1
                     : 1
@@ -61,11 +60,10 @@ class Game {
                 matches[i] = 'almost'
 
                 pendingLettersWord[letter] -= 1
-                pendingLettersTry[letter] -= 1
             }
         }
 
-        console.table(matches)
+        return matches
     }
 }
 
