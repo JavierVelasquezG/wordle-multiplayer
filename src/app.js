@@ -1,9 +1,12 @@
-const express = require('express')
+import express from 'express'
 
 const app = express()
 
-app.get('/', (req, res) => {
-    res.json('Hello World!')
+import AuthModel from './models/auth.js'
+
+app.get('/', async (req, res) => {
+    let token = await AuthModel.login('Javg')
+    res.json(token)
 })
 
 app.listen(3000)
