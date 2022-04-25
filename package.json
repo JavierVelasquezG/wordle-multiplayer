@@ -1,0 +1,20 @@
+{
+  "name": "wordle-multiplayer-server",
+  "version": "1.0.0",
+  "description": "Wordle Multiplayer",
+  "main": "app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "keywords": [],
+  "author": "Javier Velásquez",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.3",
+    "socket.io": "^4.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
