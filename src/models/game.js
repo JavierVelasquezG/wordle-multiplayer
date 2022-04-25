@@ -1,6 +1,5 @@
 class Game {
     /**
-     *
      * @param {String} word
      * @param {String} wordTry
      * @returns {Array} Coincidencias entre la palabra correcta y el intento
@@ -64,6 +63,55 @@ class Game {
         }
 
         return matches
+    }
+
+    /**
+     * @returns {String} Palabra aleatoria
+     */
+    static getWord = () => {
+        let words = [
+            'aireo',
+            'fuego',
+            'matar',
+            'flora',
+            'ruido',
+            'rabia',
+            'cabra',
+            'tutor',
+            'juego',
+            'ganar',
+            'brote',
+            'gorra',
+            'palas',
+            'cubos',
+            'linda',
+            'furia',
+            'secar',
+            'llave',
+            'silla',
+            'burro',
+            'herir',
+            'ñandu',
+            'ayuda',
+            'zumba',
+            'oiste',
+            'decia',
+            'cloro',
+            'barco',
+            'avion',
+            'autos',
+            'naves',
+            'yelmo',
+            'potro',
+            'cinco',
+            'nueve',
+            'dudar',
+            'pieza',
+            'algas'
+        ]
+
+        let random = Math.floor(Math.random() * words.length)
+        return words[random]
     }
 }
 
