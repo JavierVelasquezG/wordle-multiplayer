@@ -2,11 +2,10 @@ import express from 'express'
 
 const app = express()
 
-import AuthModel from './models/auth.js'
+import GameModel from './models/game.js'
 
-app.get('/', async (req, res) => {
-    let token = await AuthModel.login('Javg')
-    res.json(token)
+app.get('/', (req, res) => {
+    
 })
 
 app.listen(3000)
