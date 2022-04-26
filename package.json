@@ -11,6 +11,7 @@
   "author": "Javier Velásquez",
   "license": "ISC",
   "dependencies": {
+    "@thream/socketio-jwt": "^3.0.0",
     "express": "^4.17.3",
     "jsonwebtoken": "^8.5.1",
     "socket.io": "^4.5.0",
