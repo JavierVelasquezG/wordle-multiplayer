@@ -3,8 +3,10 @@ import http from 'http'
 import { Server } from 'socket.io'
 import jwt from 'jsonwebtoken'
 
+// Import Routers
+import AuthRoutes from './src/routes/auth.js'
+
 // Models
-import GameModel from './src/models/game.js'
 import AuthModel from './src/models/auth.js'
 
 // Port
@@ -18,14 +20,15 @@ const io = new Server(httpServer, {
     }
 })
 
+// Express Middlewares
+app.use(express.json())
+
 // Socket.io Middlewares
 io.use(AuthModel.tokenVerifyCallbackIO).on('connection', function (socket) {
     console.log('Hola!')
 })
 
-app.get('/', async (req, res) => {
-    let token = await AuthModel.login('Javg')
-    res.json(token)
-})
+// Express Routes
+app.use('/auth', AuthRoutes)
 
 httpServer.listen(PORT)
