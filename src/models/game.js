@@ -17,7 +17,6 @@ class Game {
         let wordTryArr = wordTry.split('')
 
         let pendingLettersWord = {}
-        let pendingLettersTry = {}
 
         let matches = []
 
