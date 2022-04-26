@@ -1,44 +1,44 @@
 class Rooms {
     static rooms = []
 
-    static joinRoom = (socket, id, user) => {
-        if (!this.rooms.find((r) => r.id === id)) {
+    static joinRoom = (socket, roomID, userID) => {
+        let roomIndex = this.rooms.findIndex((room) => room.id === roomID)
+
+        if (roomIndex === undefined) {
+            // Si la sala no existe, crearla
             this.rooms.push({
                 id,
-                owner: user,
-                users: [user]
+                owner: userID,
+                users: [userID]
             })
-        } else if (
-            this.rooms.find((r) => r.id === id).users.find((u) => u === user)
-        ) {
+        } else if (this.rooms[roomIndex].users.find((user) => user === userID)) {
+            // Si el usuario ya esta en la sala, no continuar
             return
         } else {
-            this.rooms.find((r) => r.id === id).users.push(user)
+            // Añadir usuario a la sala
+            this.rooms[roomIndex].users.push(userID)
         }
 
-        socket.join(id)
+        socket.join(roomID)
     }
 
-    static leaveRoom = (socket, id, user) => {
-        let userIndex = this.rooms
-            .find((r) => r.id === id)
-            .users.findIndex((u) => u === user)
+    static leaveRoom = (socket, roomID, userID) => {
+        let roomIndex = this.rooms.findIndex((room) => room.id === roomID)
+        let userIndex = this.rooms[roomIndex].users.findIndex((u) => u === userID)
 
-        this.rooms.find((r) => r.id === id).users.splice(userIndex, 1)
+        this.rooms[roomIndex].users.splice(userIndex, 1)
 
-        if (this.rooms.find((r) => r.id === id).users.length === 0) {
-            let roomIndex = this.rooms.findIndex((r) => r.id === id)
-
+        if (this.rooms[roomIndex].users.length === 0) {
             this.rooms.splice(roomIndex, 1)
         }
 
         socket.leave(id)
     }
 
-    static forceLeaveRoom = (socket, user) => {
+    static forceLeaveRoom = (socket, userID) => {
         this.rooms.forEach((room) => {
-            if (room.users.find((u) => u === user)) {
-                this.leaveRoom(socket, room.id, user)
+            if (room.users.find((user) => user === userID)) {
+                this.leaveRoom(socket, room.id, userID)
                 return
             }
         })
