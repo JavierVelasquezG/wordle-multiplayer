@@ -1,7 +1,8 @@
 import { Server } from 'socket.io'
 
-// Auth Model
+// Models
 import AuthModel from './auth.js'
+import RoomsModel from './rooms.js'
 
 class Socket {
     constructor(httpServer, origin) {
@@ -16,7 +17,9 @@ class Socket {
     }
 
     onConnection = (socket) => {
-        console.log('Usuario conectado')
+        socket.on('room:join', ({ id }) => RoomsModel.joinRoom(socket, id, socket.decoded.userID))
+        socket.on('room:leave', ({ id }) => RoomsModel.leaveRoom(socket, id, socket.decoded.userID))
+        socket.on('disconnect', () => RoomsModel.forceLeaveRoom(socket, socket.decoded.userID))
     }
 }
 
