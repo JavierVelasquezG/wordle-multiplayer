@@ -1,13 +1,10 @@
 import styled from 'styled-components'
 
-const PageContainer = ({ children }) => {
-    return <Container>{children}</Container>
+const PageContainer = ({ children, className }) => {
+    return <Container className={className}>{children}</Container>
 }
 
 const Container = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
     width: 100vw;
     height: 100vh;
     min-width: 320px;

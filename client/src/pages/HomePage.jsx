@@ -3,13 +3,13 @@ import styled from 'styled-components'
 // Components
 import PageContainer from '../components/UI/PageContainer'
 import Input from '../components/UI/Input'
-import Button from './../components/UI/Button'
+import Button from '../components/UI/Button'
 
 const HomePage = () => {
     return (
-        <PageContainer>
+        <HomeContainer>
             <div>
-                <Title>Wordle Multiplayer</Title>
+                <Title>Wordle Multijugador</Title>
                 <Container>
                     <Form>
                         <Input
@@ -21,24 +21,29 @@ const HomePage = () => {
                     </Form>
                 </Container>
             </div>
-        </PageContainer>
+        </HomeContainer>
     )
 }
 
+const HomeContainer = styled(PageContainer)`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
 const Title = styled.h1`
     color: #fff;
     text-align: center;
     font-weight: 500;
     font-size: 3rem;
 `
-const Form = styled.div`
-    width: 80%;
-`
 const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
     height: 200px;
+`
+const Form = styled.div`
+    width: 300px;
 `
 
 export default HomePage

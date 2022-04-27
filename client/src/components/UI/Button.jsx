@@ -10,9 +10,18 @@ const StyledButton = styled.button`
     text-transform: uppercase;
     display: block;
     width: 100%;
-    border: none;
+    border: solid #fff 1px;
+    background-color: #fff;
     outline: none;
     margin-top: 10px;
+    color: #1f643d;
+    max-width: 320px;
+
+    &:hover {
+        background-color: transparent;
+        color: #fff;
+        cursor: pointer;
+    }
 `
 
 export default Button
