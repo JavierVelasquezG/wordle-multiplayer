@@ -1,2 +1,9 @@
+# Dependencies
 node_modules
+client/node_modules
+
+# Config file
 src/config.js
+
+# Mac
+.DS_Store

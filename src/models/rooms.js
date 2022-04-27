@@ -26,8 +26,10 @@ class Rooms {
         let roomIndex = this.rooms.findIndex((room) => room.id === roomID)
         let userIndex = this.rooms[roomIndex].users.findIndex((u) => u === userID)
 
+        // Elimniar usuario de la sala
         this.rooms[roomIndex].users.splice(userIndex, 1)
 
+        // Si no quedan usuarios, eliminar sala
         if (this.rooms[roomIndex].users.length === 0) {
             this.rooms.splice(roomIndex, 1)
         }
