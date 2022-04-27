@@ -1,9 +1,24 @@
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import useKeyboard from '../../hooks/useKeyboard'
 
-const Box = ({ length }) => {
+const Box = ({ length, row, column }) => {
+    const [letter, setLetter] = useState('')
+    const [currentRow, currentRowIndex] = useKeyboard(length)
+
+    useEffect(() => {
+        if (row === currentRowIndex) {
+            if (currentRow[column]) {
+                setLetter(currentRow[column])
+            } else {
+                setLetter('')
+            }
+        }
+    }, [currentRow, currentRowIndex, row, column])
+
     return (
         <Container length={length}>
-            <Letter length={length}></Letter>
+            <Letter length={length}>{letter}</Letter>
         </Container>
     )
 }

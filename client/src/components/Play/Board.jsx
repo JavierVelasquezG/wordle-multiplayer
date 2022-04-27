@@ -11,7 +11,14 @@ const Board = ({ length }) => {
                 return (
                     <Fragment key={i}>
                         {Array.from({ length }).map((item, j) => {
-                            return <Box length={length} key={`box-${j}`} />
+                            return (
+                                <Box
+                                    length={length}
+                                    key={`box-${j}`}
+                                    row={i}
+                                    column={j}
+                                />
+                            )
                         })}
                     </Fragment>
                 )
