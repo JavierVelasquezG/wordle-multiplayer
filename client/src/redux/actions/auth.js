@@ -5,32 +5,36 @@ export const LOGOUT = 'LOGOUT'
 
 export const login = (userName) => {
     return async (dispatch) => {
-        const result = await fetch(`${endpoint}/auth/login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                userName
+        try {
+            const result = await fetch(`${endpoint}/auth/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    userName
+                })
             })
-        })
 
-        const resData = await result.json()
+            const resData = await result.json()
 
-        if (!result.ok) {
-            let errorMessage = resData.message
+            if (!result.ok) {
+                let errorMessage = resData.message
 
-            if (!resData) {
-                errorMessage = 'Hubo un error al consultar la API'
+                if (!resData) {
+                    errorMessage = 'Hubo un error al consultar la API'
+                }
+
+                throw new Error(errorMessage)
             }
 
-            throw new Error(errorMessage)
+            dispatch({
+                type: LOGIN,
+                token: resData
+            })
+        } catch (error) {
+            throw new Error(error)
         }
-
-        dispatch({
-            type: LOGIN,
-            token: resData.token
-        })
     }
 }
 

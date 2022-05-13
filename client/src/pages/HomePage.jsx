@@ -1,6 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
-// import endpoint from '../constants'
+import { useDispatch, useSelector } from 'react-redux'
+import * as authActions from './../redux/actions/auth'
+import { Navigate } from 'react-router-dom'
 
 // Components
 import PageContainer from '../components/UI/PageContainer'
@@ -9,7 +11,22 @@ import Button from '../components/UI/Button'
 import Error from '../components/UI/Error'
 
 const HomePage = () => {
+    const dispatch = useDispatch()
+    const token = useSelector((state) => state.auth.token)
+
     const [username, setUsername] = useState('')
+
+    const loginHandler = () => {
+        try {
+            dispatch(authActions.login(username))
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+    if (token) {
+        return <Navigate to='/rooms' />
+    }
 
     return (
         <HomeContainer>
@@ -26,7 +43,7 @@ const HomePage = () => {
                             }}
                             value={username}
                         />
-                        <Button>Jugar</Button>
+                        <Button onClick={loginHandler}>Jugar</Button>
                     </Form>
                 </Container>
             </div>
