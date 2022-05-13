@@ -1,11 +1,16 @@
+import { useState } from 'react'
 import styled from 'styled-components'
+// import endpoint from '../constants'
 
 // Components
 import PageContainer from '../components/UI/PageContainer'
 import Input from '../components/UI/Input'
 import Button from '../components/UI/Button'
+import Error from '../components/UI/Error'
 
 const HomePage = () => {
+    const [username, setUsername] = useState('')
+
     return (
         <HomeContainer>
             <div>
@@ -16,11 +21,16 @@ const HomePage = () => {
                             type="text"
                             id="username"
                             label="Nombre de Usuario"
+                            onChange={(e) => {
+                                setUsername(e.target.value)
+                            }}
+                            value={username}
                         />
                         <Button>Jugar</Button>
                     </Form>
                 </Container>
             </div>
+            <Error></Error>
         </HomeContainer>
     )
 }

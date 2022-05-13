@@ -20,6 +20,7 @@ class Socket {
         socket.on('room:join', ({ id }) => RoomsModel.joinRoom(socket, id, socket.decoded.userID))
         socket.on('room:leave', ({ id }) => RoomsModel.leaveRoom(socket, id, socket.decoded.userID))
         socket.on('disconnect', () => RoomsModel.forceLeaveRoom(socket, socket.decoded.userID))
+        socket.on('rooms:get', () => socket.emit('rooms:list', RoomsModel.getRooms))
     }
 }
 

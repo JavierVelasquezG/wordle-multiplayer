@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 
-const Input = ({ id, type, label }) => {
+const Input = ({ id, type, label, onChange, value }) => {
     return (
         <>
             <Label htmlFor={id}>{label}</Label>
-            <StyledInput name={id} id={id} type={type} />
+            <StyledInput value={value} onChange={onChange} name={id} id={id} type={type} />
         </>
     )
 }

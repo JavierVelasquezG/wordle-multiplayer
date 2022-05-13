@@ -1,7 +1,12 @@
 class Rooms {
     static rooms = []
 
+    static getRooms = () => rooms
+
     static joinRoom = (socket, roomID, userID) => {
+        // El usuario solo puede estar en una sala a la vez
+        this.forceLeaveRoom(socket, userID)
+
         let roomIndex = this.rooms.findIndex((room) => room.id === roomID)
 
         if (roomIndex === undefined) {
@@ -11,7 +16,9 @@ class Rooms {
                 owner: userID,
                 users: [userID]
             })
-        } else if (this.rooms[roomIndex].users.find((user) => user === userID)) {
+        } else if (
+            this.rooms[roomIndex].users.find((user) => user === userID)
+        ) {
             // Si el usuario ya esta en la sala, no continuar
             return
         } else {
@@ -24,7 +31,9 @@ class Rooms {
 
     static leaveRoom = (socket, roomID, userID) => {
         let roomIndex = this.rooms.findIndex((room) => room.id === roomID)
-        let userIndex = this.rooms[roomIndex].users.findIndex((u) => u === userID)
+        let userIndex = this.rooms[roomIndex].users.findIndex(
+            (u) => u === userID
+        )
 
         // Elimniar usuario de la sala
         this.rooms[roomIndex].users.splice(userIndex, 1)
